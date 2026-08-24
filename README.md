@@ -1,10 +1,37 @@
 # MicroBank Manager
 
-MicroBank Manager est une application web de gestion d'une institution de microfinance.
-Elle permet aux agents de gérer les clients, les comptes bancaires et les opérations financières
-(dépôts, retraits et virements).
+MicroBank Manager est une application web de gestion d'une institution de microfinance. Elle permet aux agents de gérer les clients, les comptes bancaires et les opérations financières (dépôts, retraits et virements).
 
+---
 
+## Technologies utilisées
+
+| Technologie | Rôle |
+|---|---|
+| Java 21 | Langage principal |
+| Jakarta Servlet 6.1 | Traitement des requêtes HTTP |
+| JSP / JSTL 3.0 | Affichage des vues |
+| Hibernate / JPA 7.0 | Persistance des données |
+| PostgreSQL | Base de données relationnelle |
+| Bootstrap 5.3.3 | Interface utilisateur responsive |
+| Font Awesome 6.5.1 | Icônes |
+| iText 7.2.5 | Génération des relevés PDF |
+| Maven | Gestion des dépendances |
+| Apache Tomcat 10.1.x | Serveur d'application |
+
+---
+
+## Prérequis
+
+| Outil | Requis |
+|---|---|
+| JDK | Version 21 ou supérieure |
+| Apache Tomcat | Version 10.1.x |
+| PostgreSQL | Version 14 ou supérieure |
+| Maven | Version 3.x |
+| IntelliJ IDEA | Recommandé |
+
+---
 
 ## Configuration avant lancement
 
@@ -14,23 +41,26 @@ Créer une base de données PostgreSQL nommée `microbank_db`.
 
 Ouvrir le fichier `src/main/resources/META-INF/persistence.xml` et modifier le nom d'utilisateur et le mot de passe selon votre configuration PostgreSQL.
 
+
 ### Serveur
 
-Déployer le projet sur Apache Tomcat 10.1.x et accéder à l'application via :
+Déployer le projet sur Apache Tomcat et accéder à l'application via :
 
-```http://localhost:8080/microbank```
+```
+http://localhost:8080/microbank
+```
 
-
+---
 
 ## Compte administrateur
 
-Un compte administrateur est créé automatiquement au premier démarrage pour le teste.
+Un compte administrateur est créé automatiquement au premier démarrage.
 
 - **Identifiant** : admin
 - **Mot de passe** : admin123
 - **Rôle** : ADMIN
 
-
+---
 
 ## Structure du projet
 
@@ -55,7 +85,7 @@ src/main/webapp/
 └── index.jsp      (redirection automatique vers le tableau de bord)
 ```
 
-
+---
 
 ## Fonctionnalités
 
@@ -66,7 +96,7 @@ src/main/webapp/
 
 ### Gestion des clients
 - L'agent peut ajouter, modifier et supprimer un client.
-- Le numéro de téléphone et le numéro de pièce d'identité sont uniques.
+- Le numéro de téléphone et le numéro de pièce d'identité sont uniques — le système empêche les doublons.
 - L'agent peut rechercher un client par nom, prénom, téléphone ou numéro de pièce.
 - La liste est paginée (10 clients par page).
 - La page détail affiche les informations du client ainsi que ses comptes.
@@ -79,11 +109,11 @@ src/main/webapp/
 
 ### Opérations bancaires
 - **Dépôt** : l'agent crédite un montant sur un compte.
-- **Retrait** : l'agent débite un montant (le système vérifie que le solde est suffisant).
+- **Retrait** : l'agent débite un montant — le système vérifie que le solde est suffisant.
 - **Virement** : l'agent transfère un montant d'un compte vers un autre.
 - Chaque opération vérifie que le client et le compte sont actifs avant d'exécuter.
 - Un client inactif ne peut effectuer aucune transaction.
-- Le dépôt, le retrait et le virement sont chacun exécutés dans une transaction atomique (en cas d'erreur, aucune modification n'est conservée).
+- Le dépôt, le retrait et le virement sont chacun exécutés dans une transaction atomique — en cas d'erreur, aucune modification n'est conservée.
 
 ### Historique des opérations
 - L'agent consulte toutes les opérations d'un compte.
@@ -111,7 +141,7 @@ src/main/webapp/
 ### Tableau de bord
 - Le tableau de bord affiche le nombre total de clients, le nombre de comptes, le solde total de tous les comptes actifs et le nombre d'opérations effectuées dans la journée.
 
-
+---
 
 ## Règles métier importantes
 
